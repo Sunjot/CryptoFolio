@@ -4,27 +4,33 @@ const mongoose = require('mongoose')
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const routes = require('./routes/routes.js')
+const path = require('path')
+const bodyParser = require('body-parser')
+const cors = require('cors')
 
 mongoose.connect('mongodb://localhost/Crypto')
+var db = mongoose.connection
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+const allowedOrigins = ["http://localhost:8080", "https://imalwayssunny.xyz"];
+app.use(cors({origin: allowedOrigins}));
+
+app.use(bodyParser.json());
 app.use('/', routes);
 
-var db = mongoose.connection
+// Serve react component
 
-db.on('error', () => { // check for error connecting to the db
-  console.log("error");
+app.use(express.static('build')); // tell express where all static files are located
+
+app.get('*', (req, res) => {
+  // serves index.html
+  res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
 });
 
-db.once('open', () => { // once the connection to the db goes through
+// Listen
 
-  app.get('/', (req, res) => {
-    res.send('Hello World!');
-  });
-
-  app.listen(3000, () => {
-    console.log('Listening on port 3000...');
-  });
-
+app.listen(3000, () => {
+  console.log('Listening on port 3000...');
 });

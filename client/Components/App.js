@@ -1,54 +1,50 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Home from './Home';
+import Login from './Login';
+import Signup from './Signup';
+import Header from './Header';
+import '../Stylesheets/App.scss';
 
 class App extends React.Component {
 
   constructor() {
     super();
+
     this.state = {
-      name: "",
-      password: ""
+      loggedIn: ""
     }
   }
 
-  handleChange = (e) => {
-    if (e.target.name === "username") {
-      this.setState({
-        name: e.target.value
-      });
-    }
-    if (e.target.name === "password") {
-      this.setState({
-        password: e.target.value
-      });
-    }
-  }
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-    fetch('http://localhost:3000/api/login', {
-      method: 'POST',
-      body: JSON.stringify({
-        username: this.state.name,
-        password: this.state.password
-      }),
-      headers: new Headers({
-        "content-type": "application/json"
-      })
+  getUserData = () => {
+    fetch('http://localhost:3000/user', {
+      method: 'get',
+      credentials: 'include'
     }).then((res) => {
-      console.log(res.body);
-    })
+      return res.text();
+    }).then((data) => {
+      this.setState({
+        loggedIn: data
+      });
+    });
+  }
+
+  componentWillMount() {
+    this.getUserData();
   }
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          Name: <input type="text" name="username" value={this.state.name} onChange={this.handleChange}/>
-          Password: <input type="text" name="password" value={this.state.password} onChange={this.handleChange}/>
-          <input type="submit" value="Submit"/>
-        </form>
-      </div>
+      <Router>
+        <div id="App">
+          <Header loggedIn={this.state.loggedIn} />
+          <Route exact path="/" render={() => <Home loggedIn={this.state.loggedIn}/>} />
+          <Route exact path="/login" render={() =>
+            <Login loggedIn={this.state.loggedIn} getUserData={this.getUserData}/>} />
+          <Route exact path="/signup" render={() => <Signup loggedIn={this.state.loggedIn}/>} />
+        </div>
+      </Router>
     );
   }
 }

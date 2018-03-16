@@ -18,7 +18,7 @@ router.post('/api/signup', (req, res) => {
   });
 
   User.createUser(newUser, (err, user) => {
-    console.log("hey");
+    console.log("User Created");
   });
 
 
@@ -50,13 +50,28 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(id, done) {
+
   User.getUserById(id, function(err, user) {
     done(err, user);
   });
+
 });
 
 router.post('/api/login', passport.authenticate('local'), (req, res) => {
-    res.send("hello");
+    if (req.user)
+      res.send("true");
+    else
+      res.send("false");
+});
+
+// Get user info
+
+router.get('/user', (req, res) => {
+
+  if (req.user)
+    res.send("true");
+  else
+    res.send("false");
 });
 
 

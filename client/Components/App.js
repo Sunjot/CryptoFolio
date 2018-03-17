@@ -17,6 +17,12 @@ class App extends React.Component {
     }
   }
 
+  logout = () => {
+    this.setState({
+      loggedIn: "false"
+    });
+  }
+
   getUserData = () => {
     fetch('http://localhost:3000/user', {
       method: 'get',
@@ -38,7 +44,7 @@ class App extends React.Component {
     return (
       <Router>
         <div id="App">
-          <Header loggedIn={this.state.loggedIn} />
+          <Header loggedIn={this.state.loggedIn} logout={this.logout}/>
           <Route exact path="/" render={() => <Home loggedIn={this.state.loggedIn}/>} />
           <Route exact path="/login" render={() =>
             <Login loggedIn={this.state.loggedIn} getUserData={this.getUserData}/>} />

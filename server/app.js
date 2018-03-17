@@ -13,12 +13,12 @@ mongoose.connect('mongodb://localhost/Crypto')
 var db = mongoose.connection
 
 const allowedOrigins = ["http://localhost:8080", "https://imalwayssunny.xyz"];
-app.use(cors({origin: allowedOrigins}));
+app.use(cors({origin: allowedOrigins, credentials: true}));
 app.use(bodyParser.json());
 
 app.use(session({
   secret: 'ilovedominos',
-  resave: true,
+  resave: false,
   saveUninitialized: false,
   //cookie: { secure: true }
 }));

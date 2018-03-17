@@ -58,6 +58,8 @@ passport.deserializeUser(function(id, done) {
 });
 
 router.post('/api/login', passport.authenticate('local'), (req, res) => {
+
+    res.set('Access-Control-Allow-Credentials', 'true');
     if (req.user)
       res.send("true");
     else
@@ -67,11 +69,24 @@ router.post('/api/login', passport.authenticate('local'), (req, res) => {
 // Get user info
 
 router.get('/user', (req, res) => {
-
   if (req.user)
     res.send("true");
   else
     res.send("false");
+});
+
+// User logout
+
+router.get('/logout', (req, res) => {
+  if (req.user) {
+    req.logOut();
+    req.session.destroy();
+    if (!req.user)
+      res.send("true");
+    else
+      res.send("false");
+  }
+
 });
 
 

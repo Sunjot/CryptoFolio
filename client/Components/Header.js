@@ -6,7 +6,7 @@ class Header extends React.Component {
 
   handleLogout = () => {
     fetch('http://localhost:3000/logout', {
-      method: 'get',
+      method: 'post',
       credentials: 'include'
     }).then((res) => {
       return res.text();

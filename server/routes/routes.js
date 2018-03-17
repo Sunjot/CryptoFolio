@@ -77,7 +77,7 @@ router.get('/user', (req, res) => {
 
 // User logout
 
-router.get('/logout', (req, res) => {
+router.post('/logout', (req, res) => {
   if (req.user) {
     req.logOut();
     req.session.destroy();

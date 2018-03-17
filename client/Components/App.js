@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import Home from './Home';
 import Login from './Login';
 import Signup from './Signup';
@@ -49,6 +49,7 @@ class App extends React.Component {
           <Route exact path="/login" render={() =>
             <Login loggedIn={this.state.loggedIn} getUserData={this.getUserData}/>} />
           <Route exact path="/signup" render={() => <Signup loggedIn={this.state.loggedIn}/>} />
+          <Redirect to="/" />
         </div>
       </Router>
     );

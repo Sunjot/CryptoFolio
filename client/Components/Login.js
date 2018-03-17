@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { withRouter } from 'react-router'
+import { Redirect } from 'react-router-dom';
 
 class Login extends React.Component {
 
@@ -48,16 +49,20 @@ class Login extends React.Component {
   }
 
   render() {
-    return (
-      <div id="login">
-        <h1>Login Page</h1>
-        <form onSubmit={this.handleSubmit}>
-          Name: <input type="text" name="username" value={this.state.name} onChange={this.handleChange}/>
-          Password: <input type="text" name="password" value={this.state.password} onChange={this.handleChange}/>
-          <input type="submit" value="Submit"/>
-        </form>
-      </div>
-    );
+
+    if (this.props.loggedIn === "false")
+      return (
+        <div id="login">
+          <h1>Login Page</h1>
+          <form onSubmit={this.handleSubmit}>
+            Name: <input type="text" name="username" value={this.state.name} onChange={this.handleChange}/>
+            Password: <input type="text" name="password" value={this.state.password} onChange={this.handleChange}/>
+            <input type="submit" value="Submit"/>
+          </form>
+        </div>
+      );
+    else
+      return <Redirect to="/" />
   }
 }
 

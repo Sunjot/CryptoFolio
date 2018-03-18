@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Exo+2|Neucha|PT+Sans:700|Francois+One|Montserrat');
+@import url('https://fonts.googleapis.com/css?family=Exo+2|Neucha|PT+Sans:700|Francois+One|Montserrat:100,400');
 
 // Mixins
 
@@ -27,13 +27,17 @@ body {
   padding: 0;
 }
 
+p {
+  margin: 0;
+}
+
 // Header
 
 #header {
   @include flex(row, center, center);
   width: 100%;
   height: 75px;
-  background-color: #407089;
+  background-color: #2e4956;
 
   .header-links {
     text-decoration: none;
@@ -42,5 +46,32 @@ body {
     font-family: "Montserrat";
     padding: 20px;
     text-transform: uppercase;
+  }
+}
+
+// Home page
+
+#home {
+  width: 100%;
+  height: 500px;
+  background-color: #2e4956;
+  color: white;
+
+  #cover {
+    @include flex(column, flex-start, center);
+    width: 100%;
+    padding: 20px 0;
+
+    img {
+      width: 300px;
+      height: auto;
+      margin: 40px;
+    }
+
+    p {
+      font-family: "Montserrat";
+      font-size: 25px;
+      font-weight: 100;
+    }
   }
 }

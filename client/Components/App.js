@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import Home from './Home';
 import Login from './Login';
 import Signup from './Signup';
 import Header from './Header';
+import Dashboard from './Dashboard';
 import '../Stylesheets/App.scss';
 
 class App extends React.Component {
@@ -41,18 +42,25 @@ class App extends React.Component {
   }
 
   render() {
-    return (
-      <Router>
-        <div id="App">
-          <Header loggedIn={this.state.loggedIn} logout={this.logout}/>
-          <Route exact path="/" render={() => <Home loggedIn={this.state.loggedIn}/>} />
-          <Route exact path="/login" render={() =>
-            <Login loggedIn={this.state.loggedIn} getUserData={this.getUserData}/>} />
-          <Route exact path="/signup" render={() => <Signup loggedIn={this.state.loggedIn}/>} />
-          <Redirect to="/" />
-        </div>
-      </Router>
-    );
+    if (this.state.loggedIn === "") // leave page blank until the fetch is done to prevent double render
+      return (<div></div>);
+
+    else
+      return (
+        <Router>
+          <div id="App">
+            <Header loggedIn={this.state.loggedIn} logout={this.logout}/>
+            <Switch>
+              <Route exact path="/" render={() => <Home loggedIn={this.state.loggedIn}/>} />
+              <Route exath path="/dashboard" render={() => <Dashboard loggedIn={this.state.loggedIn} />} />
+              <Route exact path="/login" render={() =>
+                <Login loggedIn={this.state.loggedIn} getUserData={this.getUserData}/>} />
+              <Route exact path="/signup" render={() => <Signup loggedIn={this.state.loggedIn}/>} />
+              <Redirect to="/" />
+            </Switch>
+          </div>
+        </Router>
+      );
   }
 }
 

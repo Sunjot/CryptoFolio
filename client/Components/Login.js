@@ -43,7 +43,6 @@ class Login extends React.Component {
     }).then((data) => {
       if (data === "true") {
         this.props.getUserData();
-        this.props.history.push('/');
       }
     });
   }
@@ -62,7 +61,7 @@ class Login extends React.Component {
         </div>
       );
     else
-      return <Redirect to="/" />
+      return <Redirect to="/dashboard" />
   }
 }
 

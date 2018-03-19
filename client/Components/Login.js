@@ -53,7 +53,7 @@ class Login extends React.Component {
       return (
         <div id="login">
           <div id="panel">
-            <p id="panelTitle">Log in to your account</p>
+            <p id="panelTitle">Log in</p>
             <form onSubmit={this.handleSubmit}>
               <input type="text" name="username" placeholder="Username" value={this.state.name} onChange={this.handleChange}/>
               <input type="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleChange}/>

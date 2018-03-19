@@ -20,14 +20,13 @@ class Header extends React.Component {
     return (
       <div id="header">
         {this.props.loggedIn === "false" &&
-          <div>
-            <Link className="header-links" to="/">Home</Link>
+          <div id="homeHeader">
             <Link className="header-links" to="/login">Login</Link>
             <Link className="header-links" to="/signup">Signup</Link>
           </div>
         }
         {this.props.loggedIn === "true" &&
-          <div>
+          <div id="loggedHeader">
             <Link className="header-links" to="/">Home</Link>
             <Link className="header-links" to="/" onClick={this.handleLogout}>Logout</Link>
           </div>

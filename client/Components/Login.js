@@ -52,12 +52,14 @@ class Login extends React.Component {
     if (this.props.loggedIn === "false")
       return (
         <div id="login">
-          <h1>Login Page</h1>
-          <form onSubmit={this.handleSubmit}>
-            Name: <input type="text" name="username" value={this.state.name} onChange={this.handleChange}/>
-            Password: <input type="text" name="password" value={this.state.password} onChange={this.handleChange}/>
-            <input type="submit" value="Submit"/>
-          </form>
+          <div id="panel">
+            <p id="panelTitle">Log in to your account</p>
+            <form onSubmit={this.handleSubmit}>
+              <input type="text" name="username" placeholder="Username" value={this.state.name} onChange={this.handleChange}/>
+              <input type="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleChange}/>
+              <input type="submit" value="Login"/>
+            </form>
+          </div>
         </div>
       );
     else

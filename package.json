@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server/app.js",
     "build": "webpack -p",
-    "dev": "webpack-dev-server --inline"
+    "dev": "webpack-dev-server --inline --hot"
   },
   "author": "Sunjot Singh",
   "license": "ISC",
@@ -26,6 +26,7 @@
     "passport-local-mongoose": "^5.0.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-hot-loader": "^4.0.0",
     "react-router-dom": "^4.2.2"
   },
   "devDependencies": {

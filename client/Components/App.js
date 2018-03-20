@@ -7,6 +7,7 @@ import Signup from './Signup';
 import Header from './Header';
 import Dashboard from './Dashboard';
 import '../Stylesheets/App.scss';
+import { hot } from 'react-hot-loader'
 
 class App extends React.Component {
 
@@ -64,4 +65,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default hot(module)(App);

@@ -126,8 +126,13 @@ button:focus {
   height: calc(100vh - 75px);
   background-color: #2e4956;
 
+  img {
+    width: 80px;
+    height: auto;
+  }
+
   #panel {
-    margin: 50px;
+    margin: 10px 50px;
     width: 400px;
     height: 300px;
     background-color: white;

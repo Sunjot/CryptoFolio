@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Redirect, Link } from 'react-router-dom';
+import Logo from '../../public/logo.png';
 
 class Signup extends React.Component {
 
@@ -43,19 +45,23 @@ class Signup extends React.Component {
   }
 
   render() {
-    return (
-      <div id="signup">
-        <div id="panel">
-          <p id="panelTitle">Sign up</p>
-          <form onSubmit={this.handleSubmit}>
-            <input type="text" name="username" placeholder="Username" value={this.state.name} onChange={this.handleChange}/>
-            <input type="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleChange}/>
-            <input type="password" name="password2" placeholder="Confirm Password" value={this.state.password} onChange={this.handleChange}/>
-            <input type="submit" value="Signup"/>
-          </form>
+    if (this.props.loggedIn === "false")
+      return (
+        <div id="signup">
+          <Link to="/"><img src={Logo}/></Link>
+          <div id="panel">
+            <p id="panelTitle">Sign up</p>
+            <form onSubmit={this.handleSubmit}>
+              <input type="text" name="username" placeholder="Username" value={this.state.name} onChange={this.handleChange}/>
+              <input type="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleChange}/>
+              <input type="password" name="password2" placeholder="Confirm Password" value={this.state.password} onChange={this.handleChange}/>
+              <input type="submit" value="Signup"/>
+            </form>
+          </div>
         </div>
-      </div>
-    );
+      );
+    else
+      return <Redirect to="/dashboard" />
   }
 }
 

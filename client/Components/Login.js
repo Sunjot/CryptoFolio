@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { withRouter } from 'react-router'
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
+import Logo from '../../public/logo.png';
+
 
 class Login extends React.Component {
 
@@ -52,6 +54,7 @@ class Login extends React.Component {
     if (this.props.loggedIn === "false")
       return (
         <div id="login">
+          <Link to="/"><img src={Logo}/></Link>
           <div id="panel">
             <p id="panelTitle">Log in</p>
             <form onSubmit={this.handleSubmit}>
